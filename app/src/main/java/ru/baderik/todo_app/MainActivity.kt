@@ -1,6 +1,5 @@
 package ru.baderik.todo_app
 
-import android.os.Binder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.baderik.todo_app.databinding.ActivityMainBinding
