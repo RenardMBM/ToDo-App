@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ToDo-App</string>
     <string name="addTask">addTask</string>
+    <string name="add_card">+ Add card</string>
 </resources>
