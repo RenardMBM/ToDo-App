@@ -1,4 +1,4 @@
-package ru.baderik.todo_app.presentaion
+package ru.baderik.todo_app.presentaion.tasks
 
 import android.os.Bundle
 import android.text.Editable

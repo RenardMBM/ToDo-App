@@ -3,7 +3,7 @@ package ru.baderik.todo_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.baderik.todo_app.databinding.ActivityMainBinding
-import ru.baderik.todo_app.presentaion.TasksFragment
+import ru.baderik.todo_app.presentaion.tasks.TasksFragment
 
 class MainActivity : AppCompatActivity() {
 

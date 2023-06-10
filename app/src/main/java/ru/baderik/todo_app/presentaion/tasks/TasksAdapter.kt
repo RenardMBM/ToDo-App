@@ -1,4 +1,4 @@
-package ru.baderik.todo_app.presentaion
+package ru.baderik.todo_app.presentaion.tasks
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.baderik.todo_app.R
-import ru.baderik.todo_app.databinding.ItemColumnBinding
 import ru.baderik.todo_app.databinding.ItemTaskBinding
 import ru.baderik.todo_app.model.task.Task
 
