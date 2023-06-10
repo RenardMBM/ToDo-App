@@ -9,19 +9,21 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import ru.baderik.todo_app.R
 import ru.baderik.todo_app.databinding.DialogAddTaskBinding
 import ru.baderik.todo_app.databinding.FragmentTasksBinding
+import ru.baderik.todo_app.model.task.Task
 
 class TasksFragment : Fragment() {
 
     private lateinit var binding: FragmentTasksBinding
     private val adapter = ColumnAdapter()
     private lateinit var addTaskDialog: BottomSheetDialog
-
+    private val viewModel: TasksViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -75,7 +77,13 @@ class TasksFragment : Fragment() {
 
         dialogBinding.createTaskButton.setOnClickListener {
             Toast.makeText(requireContext(), "Card added", Toast.LENGTH_SHORT).show()
-
+            val task = Task(
+                title = dialogBinding.titleEditText.text.toString(),
+                additionalInfo = dialogBinding.additionalExitText.text.toString(),
+                isFavorite = dialogBinding.favouriteCheckBox.isChecked,
+                isCompleted = false,
+            )
+            viewModel.createTask(task)
             addTaskDialog.dismiss()
         }
         dialogBinding.titleEditText.requestFocus()
