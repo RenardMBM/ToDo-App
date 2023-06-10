@@ -3,10 +3,12 @@ package ru.baderik.todo_app.presentaion
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.baderik.todo_app.R
 import ru.baderik.todo_app.databinding.ItemColumnBinding
+import ru.baderik.todo_app.model.task.Task
 
 class ColumnAdapter : Adapter<ColumnAdapter.ColumnViewHolder>() {
 
@@ -18,9 +20,14 @@ class ColumnAdapter : Adapter<ColumnAdapter.ColumnViewHolder>() {
 
     class ColumnViewHolder(view: View) : ViewHolder(view) {
         private val binding = ItemColumnBinding.bind(view)
+        private val adapter = TasksAdapter()
 
-        fun bind(columnName: String) {
+        fun bind(columnName: String, pos: Int) {
             binding.columnTitle.text = columnName
+
+            binding.columnRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
+
+            binding.columnRecyclerView.adapter = adapter
         }
     }
 
@@ -33,6 +40,6 @@ class ColumnAdapter : Adapter<ColumnAdapter.ColumnViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ColumnViewHolder, position: Int) {
-        holder.bind(columns[position])
+        holder.bind(columns[position], position)
     }
 }
