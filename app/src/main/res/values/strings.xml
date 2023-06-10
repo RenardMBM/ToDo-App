@@ -2,4 +2,8 @@
     <string name="app_name">ToDo-App</string>
     <string name="addTask">addTask</string>
     <string name="add_card">+ Add card</string>
+    <string name="card_name">Card name</string>
+    <string name="add_card_description">Add card description</string>
+    <string name="add_additional_info">Add additional info</string>
+    <string name="create">Create</string>
 </resources>
