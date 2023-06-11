@@ -9,4 +9,5 @@
     <string name="enter_title">Enter title</string>
     <string name="add_description">Add a description for the card</string>
     <string name="add_to_favorite">Add to favorite</string>
+    <string name="delete_task">Delete task</string>
 </resources>
