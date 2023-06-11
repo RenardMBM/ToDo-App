@@ -53,6 +53,6 @@ class ColumnAdapter(
     companion object {
         const val ALL_TASKS = "All tasks"
         const val FAVOURITE_TASKS = "Favorite"
-        const val COMPLETED_TASKS = "completed"
+        const val COMPLETED_TASKS = "Completed"
     }
 }
