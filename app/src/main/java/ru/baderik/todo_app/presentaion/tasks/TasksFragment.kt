@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -131,6 +132,40 @@ class TasksFragment : Fragment(), TasksSubscriber, TaskListener {
         }
     }
 
+    private fun showPopupMenu(view: View, task: Task) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.inflate(R.menu.task_actions_menu)
+
+        popupMenu.menu.getItem(0).title = if (!task.isCompleted)
+            "Add to completed"
+        else
+            "Remove from completed"
+
+        popupMenu.menu.getItem(1).title = if (!task.isFavorite)
+            "Add to favorites"
+        else
+            "Remove from favorites"
+
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.markAsCompleted -> {
+                    task.isCompleted = !task.isCompleted
+                    viewModel.updateTask(task)
+                }
+                R.id.markAsFavorite -> {
+                    task.isFavorite = !task.isFavorite
+                    viewModel.updateTask(task)
+                }
+                R.id.deleteTask -> {
+                    viewModel.deleteTask(task)
+                }
+            }
+            true
+        }
+
+        popupMenu.show()
+    }
+
     override fun onTaskPressed(id: UUID) {
         val fragment = TaskDetailFragment.newInstance(id)
         navigator?.launch(fragment)
@@ -138,6 +173,10 @@ class TasksFragment : Fragment(), TasksSubscriber, TaskListener {
 
     override fun addTaskPressed() {
         addTaskDialog.show()
+    }
+
+    override fun onTaskLongPressed(view: View, task: Task) {
+        showPopupMenu(view, task)
     }
 
     override fun changeTask(task: Task) {}

@@ -218,6 +218,8 @@ class TaskDetailFragment : Fragment(), TaskListener {
 
     override fun onTaskPressed(id: UUID) {}
 
+    override fun onTaskLongPressed(view: View, task: Task) {}
+
     override fun addTaskPressed() {
 
     }

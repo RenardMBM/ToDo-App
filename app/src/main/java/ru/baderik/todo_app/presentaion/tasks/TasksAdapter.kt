@@ -22,6 +22,12 @@ class TasksAdapter(val type: String, private val listener: TaskListener) : Adapt
             root.setOnClickListener {
                 listener.onTaskPressed(task.id)
             }
+
+            root.setOnLongClickListener {
+                listener.onTaskLongPressed(it, task)
+                true
+            }
+
             titleTextView.text = task.title
             additionalInfoImage.visibility = if (task.additionalInfo.isNotBlank()) View.VISIBLE else View.GONE
 
