@@ -1,5 +1,6 @@
 package ru.baderik.todo_app.presentaion.tasks
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,13 +18,28 @@ import ru.baderik.todo_app.R
 import ru.baderik.todo_app.databinding.DialogAddTaskBinding
 import ru.baderik.todo_app.databinding.FragmentTasksBinding
 import ru.baderik.todo_app.model.task.Task
+import ru.baderik.todo_app.presentaion.base.Navigator
+import ru.baderik.todo_app.presentaion.base.TaskListener
+import ru.baderik.todo_app.presentaion.taskdetail.TaskDetailFragment
+import java.util.UUID
 
-class TasksFragment : Fragment(), TasksSubscriber {
+class TasksFragment : Fragment(), TasksSubscriber, TaskListener {
 
     private lateinit var binding: FragmentTasksBinding
-    private val adapter = ColumnAdapter(this)
+    private val adapter = ColumnAdapter(this, this)
     private lateinit var addTaskDialog: BottomSheetDialog
     private val viewModel: TasksViewModel by activityViewModels()
+    private var navigator: Navigator? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        navigator = context as Navigator
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        navigator = null
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -112,6 +128,15 @@ class TasksFragment : Fragment(), TasksSubscriber {
                 adapter.setTasks(it)
             }
         }
+    }
+
+    override fun onTaskPressed(id: UUID) {
+        val fragment = TaskDetailFragment.newInstance(id)
+        navigator?.launch(fragment)
+    }
+
+    override fun addTaskPressed() {
+        addTaskDialog.show()
     }
 
     companion object {

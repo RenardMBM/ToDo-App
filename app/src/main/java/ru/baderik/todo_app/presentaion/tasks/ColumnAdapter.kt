@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.baderik.todo_app.R
 import ru.baderik.todo_app.databinding.ItemColumnBinding
+import ru.baderik.todo_app.presentaion.base.TaskListener
 
-class ColumnAdapter(private val subscriber: TasksSubscriber) : Adapter<ColumnAdapter.ColumnViewHolder>() {
+class ColumnAdapter(
+    private val subscriber: TasksSubscriber,
+    private val listener: TaskListener
+    ) : Adapter<ColumnAdapter.ColumnViewHolder>() {
 
     private val columns = listOf<String>(
         ALL_TASKS,
@@ -21,13 +25,16 @@ class ColumnAdapter(private val subscriber: TasksSubscriber) : Adapter<ColumnAda
         private val binding = ItemColumnBinding.bind(view)
         private lateinit var adapter: TasksAdapter
 
-        fun bind(columnName: String, subscriber: TasksSubscriber) {
+        fun bind(columnName: String, subscriber: TasksSubscriber, listener: TaskListener) {
             binding.columnTitle.text = columnName
 
-            adapter = TasksAdapter(columnName)
+            adapter = TasksAdapter(columnName, listener)
             subscriber.observeData(adapter)
             binding.columnRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
             binding.columnRecyclerView.adapter = adapter
+            binding.addCardButton.setOnClickListener {
+                listener.addTaskPressed()
+            }
         }
     }
 
@@ -40,7 +47,7 @@ class ColumnAdapter(private val subscriber: TasksSubscriber) : Adapter<ColumnAda
     }
 
     override fun onBindViewHolder(holder: ColumnViewHolder, position: Int) {
-        holder.bind(columns[position], subscriber)
+        holder.bind(columns[position], subscriber, listener)
     }
 
     companion object {

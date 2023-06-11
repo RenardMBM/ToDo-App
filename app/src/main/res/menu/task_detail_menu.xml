@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="addToCompleted"
+        android:id="@+id/addToCompleted"
         android:icon="@drawable/ic_task"
         android:title="Add to completed"
         app:showAsAction="never"/>
 
     <item
-        android:id="delete"
+        android:id="@+id/delete"
         android:icon="@drawable/ic_delete"
         android:title="Delete"
         app:showAsAction="never"/>

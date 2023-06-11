@@ -7,8 +7,6 @@ interface TaskListener {
 
     fun onTaskPressed(id: UUID)
 
-    fun onTaskChanged(task: Task)
-
-    fun onTaskDeleted(task: Task)
+    fun addTaskPressed()
 
 }
