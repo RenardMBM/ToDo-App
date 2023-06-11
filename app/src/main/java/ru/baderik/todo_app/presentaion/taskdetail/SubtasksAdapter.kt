@@ -1,5 +1,6 @@
 package ru.baderik.todo_app.presentaion.taskdetail
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,13 @@ class SubtasksAdapter(private val listener: TaskListener) : Adapter<SubtasksAdap
 
             titleTextView.text = task.title
 
+            titleTextView.paintFlags = if (task.isCompleted) titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else 0
+
+
             if (task.additionalInfo.isNotBlank()) {
                 additionalInfoTextView.visibility = View.VISIBLE
                 additionalInfoTextView.text = task.additionalInfo
+                additionalInfoTextView.paintFlags = if (task.isCompleted) additionalInfoTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else 0
             } else {
                 additionalInfoTextView.visibility = View.GONE
             }
