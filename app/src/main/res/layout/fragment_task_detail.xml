@@ -7,11 +7,32 @@
     android:background="@color/grey"
     android:paddingHorizontal="8dp">
 
-    <Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:navigationIcon="@drawable/ic_back"
-        app:menu="@menu/task_detail_menu"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:backgroundTint="@color/transparent"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/moreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more"
+            android:backgroundTint="@color/transparent"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/titleEditText"
