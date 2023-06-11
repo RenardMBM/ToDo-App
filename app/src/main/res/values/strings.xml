@@ -6,4 +6,7 @@
     <string name="add_card_description">Add card description</string>
     <string name="add_additional_info">Add additional info</string>
     <string name="create">Create</string>
+    <string name="enter_title">Enter title</string>
+    <string name="add_description">Add a description for the card</string>
+    <string name="add_to_favorite">Add to favorite</string>
 </resources>
