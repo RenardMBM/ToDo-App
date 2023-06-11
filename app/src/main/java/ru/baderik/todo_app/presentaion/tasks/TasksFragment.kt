@@ -139,6 +139,10 @@ class TasksFragment : Fragment(), TasksSubscriber, TaskListener {
         addTaskDialog.show()
     }
 
+    override fun changeTask(task: Task) {}
+
+    override fun deleteTasK(task: Task) {}
+
     companion object {
 
         fun newInstance(): TasksFragment = TasksFragment()
