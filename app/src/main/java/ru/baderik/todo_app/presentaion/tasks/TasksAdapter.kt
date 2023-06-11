@@ -9,7 +9,7 @@ import ru.baderik.todo_app.R
 import ru.baderik.todo_app.databinding.ItemTaskBinding
 import ru.baderik.todo_app.model.task.Task
 
-class TasksAdapter : Adapter<TasksAdapter.TasksViewHolder>() {
+class TasksAdapter(val type: String) : Adapter<TasksAdapter.TasksViewHolder>() {
 
     private var tasks: MutableList<Task> = mutableListOf<Task>()
 

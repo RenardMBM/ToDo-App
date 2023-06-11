@@ -9,23 +9,24 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.baderik.todo_app.R
 import ru.baderik.todo_app.databinding.ItemColumnBinding
 
-class ColumnAdapter : Adapter<ColumnAdapter.ColumnViewHolder>() {
+class ColumnAdapter(private val subscriber: TasksSubscriber) : Adapter<ColumnAdapter.ColumnViewHolder>() {
 
     private val columns = listOf<String>(
-        "All tasks",
-        "Favorite",
-        "Completed",
+        ALL_TASKS,
+        FAVOURITE_TASKS,
+        COMPLETED_TASKS
     )
 
     class ColumnViewHolder(view: View) : ViewHolder(view) {
         private val binding = ItemColumnBinding.bind(view)
-        private val adapter = TasksAdapter()
+        private lateinit var adapter: TasksAdapter
 
-        fun bind(columnName: String, pos: Int) {
+        fun bind(columnName: String, subscriber: TasksSubscriber) {
             binding.columnTitle.text = columnName
 
+            adapter = TasksAdapter(columnName)
+            subscriber.observeData(adapter)
             binding.columnRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
-
             binding.columnRecyclerView.adapter = adapter
         }
     }
@@ -39,6 +40,12 @@ class ColumnAdapter : Adapter<ColumnAdapter.ColumnViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ColumnViewHolder, position: Int) {
-        holder.bind(columns[position], position)
+        holder.bind(columns[position], subscriber)
+    }
+
+    companion object {
+        const val ALL_TASKS = "All tasks"
+        const val FAVOURITE_TASKS = "Favorite"
+        const val COMPLETED_TASKS = "completed"
     }
 }

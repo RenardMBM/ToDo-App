@@ -11,9 +11,9 @@ import ru.baderik.todo_app.model.task.TaskRepository
 class TasksViewModel : ViewModel() {
 
     private val taskRepository = TaskRepository.get()
-    private val allTasks: LiveData<List<Task>> = taskRepository.getAllTasks()
-    private val favoriteTasks: LiveData<List<Task>> = taskRepository.getFavouriteTasks()
-    private val completedTasks: LiveData<List<Task>> = taskRepository.getCompletedTasks()
+    val allTasks: LiveData<List<Task>> = taskRepository.getAllTasks()
+    val favoriteTasks: LiveData<List<Task>> = taskRepository.getFavouriteTasks()
+    val completedTasks: LiveData<List<Task>> = taskRepository.getCompletedTasks()
 
     fun createTask(task: Task) = viewModelScope.launch {
         taskRepository.addTask(task)

@@ -18,10 +18,10 @@ import ru.baderik.todo_app.databinding.DialogAddTaskBinding
 import ru.baderik.todo_app.databinding.FragmentTasksBinding
 import ru.baderik.todo_app.model.task.Task
 
-class TasksFragment : Fragment() {
+class TasksFragment : Fragment(), TasksSubscriber {
 
     private lateinit var binding: FragmentTasksBinding
-    private val adapter = ColumnAdapter()
+    private val adapter = ColumnAdapter(this)
     private lateinit var addTaskDialog: BottomSheetDialog
     private val viewModel: TasksViewModel by activityViewModels()
     override fun onCreateView(
@@ -98,6 +98,20 @@ class TasksFragment : Fragment() {
         }
 
         addTaskDialog.setContentView(dialogBinding.root)
+    }
+
+    override fun observeData(adapter: TasksAdapter) {
+        when(adapter.type) {
+            ColumnAdapter.ALL_TASKS -> viewModel.allTasks.observe(viewLifecycleOwner) {
+                adapter.setTasks(it)
+            }
+            ColumnAdapter.FAVOURITE_TASKS -> viewModel.favoriteTasks.observe(viewLifecycleOwner) {
+                adapter.setTasks(it)
+            }
+            ColumnAdapter.COMPLETED_TASKS -> viewModel.completedTasks.observe(viewLifecycleOwner) {
+                adapter.setTasks(it)
+            }
+        }
     }
 
     companion object {
