@@ -49,7 +49,7 @@ class TasksFragment : Fragment(), TasksSubscriber, TaskListener {
 
         initRecyclerView()
 
-        addTaskDialog = BottomSheetDialog(requireContext())
+        addTaskDialog = BottomSheetDialog(requireContext(), R.style.BottomDialogStyle)
         addTaskDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         initAddTaskDialog()
 

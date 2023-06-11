@@ -81,7 +81,7 @@ class TaskDetailFragment : Fragment(), TaskListener {
             showPopupMenu(it)
         }
 
-        addSubtaskDialog = BottomSheetDialog(requireContext())
+        addSubtaskDialog = BottomSheetDialog(requireContext(), R.style.BottomDialogStyle)
         addSubtaskDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         initAddTaskDialog()
 
