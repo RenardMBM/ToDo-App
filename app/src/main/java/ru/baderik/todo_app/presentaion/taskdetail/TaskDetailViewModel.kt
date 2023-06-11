@@ -30,6 +30,19 @@ class TaskDetailViewModel : ViewModel() {
         taskRepository.updateTask(task)
     }
 
+    fun changeSubtask(subtask: Task) = viewModelScope.launch(Dispatchers.IO) {
+        val task = this@TaskDetailViewModel.task.value ?: return@launch
+        if (subtask.isCompleted) {
+            task.completedSubtasksCount += 1
+        } else {
+            task.completedSubtasksCount -= 1
+            if (task.completedSubtasksCount < 0)
+                task.completedSubtasksCount = 0
+        }
+        taskRepository.updateTask(subtask)
+        taskRepository.updateTask(task)
+    }
+
     fun addSubtask(subtask: Task) = viewModelScope.launch(Dispatchers.IO) {
         taskRepository.addTask(subtask)
         val task = this@TaskDetailViewModel.task.value ?: return@launch

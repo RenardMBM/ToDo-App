@@ -34,7 +34,7 @@ class TasksAdapter(val type: String, private val listener: TaskListener) : Adapt
             if (task.subtaskCount > 0) {
                 subtasksImage.visibility = View.VISIBLE
                 subtaskCountTextView.visibility = View.VISIBLE
-                subtaskCountTextView.text = task.subtaskCount.toString()
+                subtaskCountTextView.text = "${task.completedSubtasksCount}/${task.subtaskCount}"
             } else {
                 subtasksImage.visibility = View.GONE
                 subtaskCountTextView.visibility = View.GONE

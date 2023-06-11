@@ -12,5 +12,6 @@ data class Task(
     var isCompleted: Boolean = false,
     var isFavorite: Boolean = false,
     var parent: UUID?,
-    var subtaskCount: Int = 0
+    var subtaskCount: Int = 0,
+    var completedSubtasksCount: Int = 0
 )

@@ -225,7 +225,7 @@ class TaskDetailFragment : Fragment(), TaskListener {
     }
 
     override fun changeTask(task: Task) {
-        viewModel.saveTask(task)
+        viewModel.changeSubtask(task)
     }
 
     override fun deleteTasK(task: Task) {
