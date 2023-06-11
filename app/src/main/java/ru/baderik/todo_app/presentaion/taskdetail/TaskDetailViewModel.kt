@@ -18,6 +18,9 @@ class TaskDetailViewModel : ViewModel() {
     val task: LiveData<Task?> = taskId.switchMap { taskId ->
         taskRepository.getTask(taskId)
     }
+    val subtasks: LiveData<List<Task>> = taskId.switchMap { taskId ->
+        taskRepository.getSubtasks(taskId)
+    }
 
     fun load(_taskId: UUID) {
         taskId.value = _taskId

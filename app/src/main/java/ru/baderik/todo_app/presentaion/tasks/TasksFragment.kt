@@ -98,6 +98,7 @@ class TasksFragment : Fragment(), TasksSubscriber, TaskListener {
                 additionalInfo = dialogBinding.additionalExitText.text.toString(),
                 isFavorite = dialogBinding.favouriteCheckBox.isChecked,
                 isCompleted = false,
+                parent = null
             )
             viewModel.createTask(task)
             addTaskDialog.dismiss()

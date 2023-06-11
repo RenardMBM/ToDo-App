@@ -21,19 +21,18 @@ class TaskRepository private constructor(context: Context) {
     fun getCompletedTasks(): LiveData<List<Task>> = tasksDao.getCompletedTasks()
     fun getFavouriteTasks(): LiveData<List<Task>> = tasksDao.getFavoriteTasks()
     fun getTask(id: UUID): LiveData<Task?> = tasksDao.getTaskById(id)
+    fun getSubtasks(parentId: UUID): LiveData<List<Task>> = tasksDao.getSubtasks(parentId)
 
     suspend fun addTask(task: Task) = tasksDao.addTask(task)
 
     suspend fun updateTask(task: Task) {
-
         tasksDao.updateTask(task)
-
+        if (task.isCompleted) tasksDao.markSubtasksAsCompleted(task.id)
     }
 
     suspend fun removeTask(task: Task) {
-
         tasksDao.deleteTask(task)
-
+        tasksDao.deleteSubtasks(task.id)
     }
 
     companion object {

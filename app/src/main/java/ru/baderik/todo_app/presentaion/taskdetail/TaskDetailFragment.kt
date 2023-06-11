@@ -109,6 +109,9 @@ class TaskDetailFragment : Fragment(), TaskListener {
                 changeScreen()
             }
         }
+        viewModel.subtasks.observe(viewLifecycleOwner) {
+            adapter.setTasks(it)
+        }
     }
 
     override fun onStart() {
@@ -194,6 +197,7 @@ class TaskDetailFragment : Fragment(), TaskListener {
                 additionalInfo = dialogBinding.additionalExitText.text.toString(),
                 isFavorite = dialogBinding.favouriteCheckBox.isChecked,
                 isCompleted = false,
+                parent = this.task.id
             )
             viewModel.addSubtask(task)
             addSubtaskDialog.dismiss()
@@ -219,11 +223,11 @@ class TaskDetailFragment : Fragment(), TaskListener {
     }
 
     override fun changeTask(task: Task) {
-        TODO("Not yet implemented")
+        viewModel.saveTask(task)
     }
 
     override fun deleteTasK(task: Task) {
-        view
+        viewModel.deleteTask(task)
     }
 
     companion object {
