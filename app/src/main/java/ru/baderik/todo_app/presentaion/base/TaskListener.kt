@@ -9,4 +9,8 @@ interface TaskListener {
 
     fun addTaskPressed()
 
+    fun changeTask(task: Task)
+
+    fun deleteTasK(task: Task)
+
 }
