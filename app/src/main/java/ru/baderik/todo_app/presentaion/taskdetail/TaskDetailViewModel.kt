@@ -32,9 +32,19 @@ class TaskDetailViewModel : ViewModel() {
 
     fun addSubtask(subtask: Task) = viewModelScope.launch(Dispatchers.IO) {
         taskRepository.addTask(subtask)
+        val task = this@TaskDetailViewModel.task.value ?: return@launch
+        task.subtaskCount += 1
+        taskRepository.updateTask(task)
     }
 
-    fun deleteTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
-        taskRepository.removeTask(task)
+    fun deleteTask(subtask: Task) = viewModelScope.launch(Dispatchers.IO) {
+        taskRepository.removeTask(subtask)
+        val task = this@TaskDetailViewModel.task.value ?: return@launch
+        if (subtask.parent == task.id) {
+            task.subtaskCount -= 1
+            if (task.subtaskCount < 0) task.subtaskCount = 0
+            taskRepository.updateTask(task)
+        }
+
     }
 }

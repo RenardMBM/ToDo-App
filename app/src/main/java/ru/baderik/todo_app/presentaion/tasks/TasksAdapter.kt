@@ -25,6 +25,15 @@ class TasksAdapter(val type: String, private val listener: TaskListener) : Adapt
             titleTextView.text = task.title
             additionalInfoImage.visibility = if (task.additionalInfo.isNotBlank()) View.VISIBLE else View.GONE
 
+            if (task.subtaskCount > 0) {
+                subtasksImage.visibility = View.VISIBLE
+                subtaskCountTextView.visibility = View.VISIBLE
+                subtaskCountTextView.text = task.subtaskCount.toString()
+            } else {
+                subtasksImage.visibility = View.GONE
+                subtaskCountTextView.visibility = View.GONE
+            }
+
         }
     }
 
